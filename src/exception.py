@@ -4,7 +4,7 @@ handling the errors and will be giving the custon error messages.
 '''
 
 import sys 
-from src.logger import logging
+# from src.logger import logging
 
 def error_message_detail(error, error_detail : sys):
     _, _, exc_tb = error_detail.exc_info()
