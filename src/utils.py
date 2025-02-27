@@ -22,6 +22,12 @@ def save_object(filepath, obj):
     except Exception as e :
         raise CustomException(e, sys)
     
+def load_object(filepath):
+    try:
+        with open(filepath, 'rb') as file_obj:
+            return dill.load(file_obj) 
+    except Exception as e:
+        CustomException(e, sys)
 
 def evaluate_models(x_tr, y_tr, x_tst, y_tst, models, params : dict | None):
     try : 
