@@ -43,7 +43,32 @@ class ModelTrainer:
                 'Ada Boost'        : AdaBoostRegressor()
             }
 
-            models_report : dict = evaluate_models(x_tr, y_tr, x_tst, y_tst, models)
+            params = {
+                'Liner Regression': {},
+                'KNN Regressor' : {},
+                'Decision Tree': {
+                    'criterion':['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
+                    'splitter':['best','random'],
+                },
+                'Random Forest': {
+                    'n_estimators': [8,16,32,64,128]
+                },
+                'Gradient Boost':{
+                    'learning_rate':[.1,.01,.05,.001],
+                    'subsample':[0.6,0.7,0.75,0.8,0.85,0.9],
+                    'n_estimators': [8,16,32,64,128]
+                },
+                'XG Boost': {
+                    'learning_rate':[.1,.01,.05,.001],
+                    'n_estimators': [8,16,32,64,128,256]
+                },
+                'Ada Boost' : {
+                    'learning_rate':[.1,.01,0.5,.001],      
+                    'n_estimators': [8,16,32,64,128]
+                }
+            }
+
+            models_report : dict = evaluate_models(x_tr, y_tr, x_tst, y_tst, models, params)
 
             # Getting the best models from the dict
             best_model_score = max(sorted(models_report.values()))
